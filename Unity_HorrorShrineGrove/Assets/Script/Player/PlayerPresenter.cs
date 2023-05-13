@@ -6,12 +6,13 @@ public class PlayerPresenter : MonoBehaviour
 {
     
     [SerializeField] private PlayerView _view;
-    private PlayerUseCase _usecase;
+    [SerializeField] private PlayerUseCase _usecase;
     void Start()
     {
-        _usecase = new PlayerUseCase();
         
-        _view.EventMove = _usecase.Move;
+
+
+        _view.Initialization();
         
     }
 

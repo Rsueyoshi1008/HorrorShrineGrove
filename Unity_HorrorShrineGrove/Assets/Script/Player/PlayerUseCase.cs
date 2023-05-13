@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace Script.Player
 {
-    public class PlayerUseCase
+    public class PlayerUseCase : MonoBehaviour
     {
-        
-        public void Move(float horizontalInput , float verticalInput, float movespeed,Transform moveObject)
+        private float MoveSpeed = 5f;
+
+        [SerializeField] private Rigidbody rb;
+        void Update()
+        {
+            float horizontalInput = Input.GetAxisRaw("Horizontal");
+            float verticalInput = Input.GetAxisRaw("Vertical");
+
+            Move(horizontalInput,verticalInput);
+        }
+        public void Move(float horizontalInput , float verticalInput)
         {
            //ベクトルに変換する
             Vector3 movement = new Vector3(horizontalInput,1.0f,verticalInput);
@@ -15,8 +25,8 @@ namespace Script.Player
             movement = movement.normalized;
 
             //キャラの移動をする
-            moveObject.position = movement * movespeed * Time.deltaTime;
-            
+            transform.Translate(movement * MoveSpeed * Time.deltaTime);
+            //Debug.Log(movement);
         }
         
     }

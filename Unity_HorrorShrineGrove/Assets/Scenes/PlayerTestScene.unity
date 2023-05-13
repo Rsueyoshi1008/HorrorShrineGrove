@@ -429,6 +429,7 @@ GameObject:
   - component: {fileID: 1877586552}
   - component: {fileID: 1877586551}
   - component: {fileID: 1877586557}
+  - component: {fileID: 1877586558}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -464,8 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3cf4e7985a94d42b458c2be7867ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 1877586551}
-  traget: {fileID: 1877586556}
 --- !u!65 &1877586553
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -558,3 +557,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _view: {fileID: 1877586552}
+  _usecase: {fileID: 1877586558}
+--- !u!114 &1877586558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877586550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7afc02f4b71e842b729ac491638c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
