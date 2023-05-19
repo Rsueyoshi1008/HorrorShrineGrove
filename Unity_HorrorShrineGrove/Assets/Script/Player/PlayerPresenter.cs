@@ -6,12 +6,15 @@ public class PlayerPresenter : MonoBehaviour
 {
     
     [SerializeField] private PlayerView _view;
-    private PlayerUseCase _usecase;
+    [SerializeField] private PlayerUseCase _useCase;
+
+    [SerializeField] private TpsController _camera;
     void Start()
     {
-        _usecase = new PlayerUseCase();
-        
-        _view.EventMove = _usecase.Move;
+        _view.EventDebugTest = _useCase.Test;
+        _camera.EventPlayer = _useCase.Move;
+
+        _view.Initialization();
         
     }
 
