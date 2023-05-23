@@ -8,14 +8,15 @@ namespace Script.Player
         
         public void Move(float horizontalInput , float verticalInput, float movespeed,Transform moveObject)
         {
-           //ベクトルに変換する
-            Vector3 movement = new Vector3(horizontalInput,1.0f,verticalInput);
+        //    //ベクトルに変換する
+        //     Vector3 movement = new Vector3(horizontalInput,2.0f,verticalInput);
 
-            //移動ベクトルを正規化する
-            movement = movement.normalized;
+        //     //移動ベクトルを正規化する
+        //     movement = movement.normalized;
 
-            //キャラの移動をする
-            moveObject.position = movement * movespeed * Time.deltaTime;
+        //     //キャラの移動をする
+        //     moveObject.position = movement * movespeed * Time.deltaTime;
+        //     Debug.Log("Move");
             
         }
         

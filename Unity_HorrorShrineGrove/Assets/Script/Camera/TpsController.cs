@@ -16,6 +16,10 @@ public class TpsController : MonoBehaviour
     private float pitchMax = 60.0f; //カメラの最大角
     private float horizontalityAngle = 0.0f;  //水平のカメラ角度
     private float verticalAngle = 0.0f; //垂直のカメラ角度
+
+    private float rotationX;
+    private float moveSpeed = 5f;
+    private bool invertY  = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,19 +37,37 @@ public class TpsController : MonoBehaviour
         //マウスのY座標の移動量を取得
         float vertical = Input.GetAxis("Mouse Y") * turnSpeed;
 
-        horizontalityAngle += horizontal;
-        Quaternion horizontalityRotation = Quaternion.Euler(-60f, horizontalityAngle, 0f);
-       
+        // 水平の入力取得
+        float horizontalInput = Input.GetAxisRaw("Horizontal");
         
-        verticalAngle += vertical;
-        verticalAngle = Mathf.Clamp(verticalAngle, pitchMin, pitchMax);
-        Quaternion verticalRotation = Quaternion.Euler(-verticalAngle, 0f, 0f);
+        // 垂直の入力を取得
+        float verticalInput = Input.GetAxisRaw("Vertical");
 
-        Vector3 position = target.position + horizontalityRotation * verticalRotation * distance;
+        if (!invertY)
+        {
+            horizontal *= -1;
+        }
+        
+        // カメラの水平方向の回転を適用する
+        transform.localRotation *= Quaternion.Euler(0, horizontal, 0);
+        
+        // 垂直方向の回転を計算する
+        rotationX -= vertical;
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        
+        Vector3 movement = transform.forward * verticalInput + transform.right * horizontalInput;
+        // 移動ベクトルの正規化
+        movement.Normalize();
+        
+        // カメラの高さを保持する
+        float originalCameraHeight = transform.position.y;
+        // キャラの移動をする
+        transform.Translate(movement * moveSpeed * Time.deltaTime, Space.World);
+        // カメラの高さを元の高さに戻す
+        transform.position = new Vector3(transform.position.x, originalCameraHeight, transform.position.z);
+        
+        // カメラの垂直方向の回転を適用する
+        transform.localRotation = Quaternion.Euler(rotationX, transform.localRotation.eulerAngles.y, 0);
 
-        // カメラの位置を更新
-        transform.position = position;
-        // カメラがターゲットを注目する
-        transform.LookAt(target);
     }
 }
