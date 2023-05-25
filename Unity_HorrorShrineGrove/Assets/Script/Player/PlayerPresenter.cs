@@ -4,15 +4,17 @@ using UnityEngine;
 using Script.Player;
 public class PlayerPresenter : MonoBehaviour
 {
-    
-    [SerializeField] private PlayerView _view;
+    [SerializeField] private GameManager gameManager;
     private PlayerUseCase _usecase;
     void Start()
     {
-        _usecase = new PlayerUseCase();
-        
-        _view.EventMove = _usecase.Move;
-        
+        _usecase = new PlayerUseCase(gameManager.GetDataRepository());
+
+        //_usecase.ChangeModel = 
+
+
+        _usecase.SynModel();
     }
+    
 
 }
