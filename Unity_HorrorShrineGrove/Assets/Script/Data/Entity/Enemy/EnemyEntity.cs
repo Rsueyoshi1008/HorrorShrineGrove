@@ -3,20 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Data.Entity
 {
-    public class PlayerEntity
+    public class EnemyEntity
     {
         public int HP;
         public int ATK;
+        public int DEF;
         public int Speed;
-
-        public PlayerEntity(int hp, int atk, int speed)
+        public EnemyEntity(int hp, int atk, int def, int speed)
         {
             HP = hp;
             ATK = atk;
+            DEF = def;
             Speed = speed;
         }
     }
 }
-
-    
 

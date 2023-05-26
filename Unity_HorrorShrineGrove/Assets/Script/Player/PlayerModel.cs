@@ -7,10 +7,12 @@ namespace InGame.Player.Model
     {
         public int HP;
         public int ATK;
+        public int Speed;
         public PlayerModel()
         {
             HP = 0;
             ATK = 0;
+            Speed = 0;
         }
     }
 }

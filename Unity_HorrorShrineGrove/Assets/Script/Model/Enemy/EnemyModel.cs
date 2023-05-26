@@ -1,22 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Data.Entity
+namespace Enemys.Model
 {
-    public class PlayerEntity
+    public class EnemyModel
     {
         public int HP;
         public int ATK;
+        public int DEF;
         public int Speed;
-
-        public PlayerEntity(int hp, int atk, int speed)
+        public EnemyModel()
         {
-            HP = hp;
-            ATK = atk;
-            Speed = speed;
+            HP = 0;
+            ATK = 0;
+            DEF = 0;
+            Speed = 0;
         }
     }
 }
-
-    
 

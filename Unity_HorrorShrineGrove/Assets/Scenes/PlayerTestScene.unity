@@ -144,15 +144,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5016791303101058274, guid: 4f56a0d451ac4e04cbb832d9f0501bfb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: 5016791303101058274, guid: 4f56a0d451ac4e04cbb832d9f0501bfb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.49
       objectReference: {fileID: 0}
     - target: {fileID: 5016791303101058274, guid: 4f56a0d451ac4e04cbb832d9f0501bfb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5016791303101058274, guid: 4f56a0d451ac4e04cbb832d9f0501bfb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -500,8 +500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab2a7624bb2e54c429e3cdcb4f9ba8a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mainCamera: {fileID: 461861180}
-  target: {fileID: 1877586556}
 --- !u!1 &644976317
 GameObject:
   m_ObjectHideFlags: 0
@@ -532,6 +530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1888906060}
+  _camera: {fileID: 0}
+  player: {fileID: 0}
 --- !u!4 &644976319
 Transform:
   m_ObjectHideFlags: 0
@@ -560,15 +560,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3525543741562380637, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.67
       objectReference: {fileID: 0}
     - target: {fileID: 3525543741562380637, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.82
       objectReference: {fileID: 0}
     - target: {fileID: 3525543741562380637, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 3525543741562380637, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1039,6 +1039,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
+  _camera: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1888906059
 GameObject:
   m_ObjectHideFlags: 0

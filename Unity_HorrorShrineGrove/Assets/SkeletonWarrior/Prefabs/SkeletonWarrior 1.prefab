@@ -363,7 +363,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 409b113b7f8250a4191d42a90c78ab8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  Player: {fileID: 2344980507641021850, guid: bb07c817ce9e7144a8e688fcf3396827, type: 3}
   attackDistance: 2
   moveSpeed: 3
   rotationSpeed: 3

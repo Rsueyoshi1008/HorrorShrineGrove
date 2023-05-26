@@ -12,11 +12,19 @@ namespace Script.Player
         private DataRepository _repository;
 
         public UnityAction<PlayerModel> ChangeModel;
+        public UnityAction ChangeScene;
+
+        private Transform Player;
 
         public PlayerUseCase(DataRepository Repository)
         {
             _repository = Repository;
             _model = new PlayerModel();
+        }
+
+        public void GetTarget(Transform target)
+        {
+            Player = target;
         }
 
         public void SynModel()
@@ -25,28 +33,24 @@ namespace Script.Player
 
             _model.HP = player.HP;
             _model.ATK = player.ATK;
+            _model.Speed = player.Speed;
             
             ChangeModel?.Invoke(_model);
         }
-        public void Move(float horizontalInput , float verticalInput, float movespeed,Transform moveObject)
+        public void Move(Vector3 movement)
         {
-        //    //ベクトルに変換する
-        //     Vector3 movement = new Vector3(horizontalInput,2.0f,verticalInput);
-
-        //     //移動ベクトルを正規化する
-        //     movement = movement.normalized;
-
-        //     //キャラの移動をする
-        //     moveObject.position = movement * movespeed * Time.deltaTime;
-        //     Debug.Log("Move");
+            //キャラの移動をする
+            Player.Translate(movement * _model.Speed * Time.deltaTime,Space.World);
             
         }
         //敵から攻撃を受けたときの関数
         public void Damage(int damage)
         {
-            Debug.Log(_model.HP);
             _model.HP -= damage;
-            Debug.Log("HP" + _model.HP);
+            if(_model.HP == 0)
+            {
+                ChangeScene?.Invoke();
+            }
         }
         
     }
