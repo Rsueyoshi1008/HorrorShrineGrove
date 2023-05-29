@@ -52,11 +52,11 @@ public class AKScript : MonoBehaviour
 
         float distance = Mathf.Abs(transform.position.x - initialX); // 弾の現在のX座標と初期X座標の距離を計算
 
-        if (distance >= 200f)
-        {
-            Destroy(gameObject); // X座標の移動距離が200以上になった場合は弾を削除
-            Debug.Log("Bullet traveled 200 units on the X-axis.");
-        }
+        // if (distance >= 200f)
+        // {
+        //     Destroy(gameObject); // X座標の移動距離が200以上になった場合は弾を削除
+        //     Debug.Log("Bullet traveled 200 units on the X-axis.");
+        // }
 
     }
 
