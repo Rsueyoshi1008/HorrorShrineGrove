@@ -6,7 +6,7 @@ namespace Enemys.Model
     public class EnemyModel
     {
         public int HP;
-        public int ATK;
+        public float ATK;
         public int DEF;
         public int Speed;
         public int PlayerDamage;
