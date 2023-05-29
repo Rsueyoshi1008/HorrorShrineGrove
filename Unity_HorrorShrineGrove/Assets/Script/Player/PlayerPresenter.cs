@@ -6,6 +6,7 @@ public class PlayerPresenter : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
     private PlayerUseCase _usecase;
+    [SerializeField] private PlayerView _view;
     [SerializeField] private TpsController _camera;
     [SerializeField] private Transform player;
 
@@ -18,7 +19,7 @@ public class PlayerPresenter : MonoBehaviour
         _usecase = new PlayerUseCase(gameManager.GetDataRepository());
         _usecase.GetTarget(player);
         _camera.EventMove = _usecase.Move;
-        enemy.EventDamage = _usecase.Damage;
+        enemy.EventDamage = _view.Damage;
         //_usecase.ChangeScene = 
 
         _usecase.SynModel();
