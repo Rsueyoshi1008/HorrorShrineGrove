@@ -5,38 +5,36 @@ using Data.Repository;
 public class Enemy : MonoBehaviour
 {
     private Transform target;
-    private EnemyModel _model;
+    private Rigidbody rb;
+    
     private DataRepository _repository;
     [SerializeField] private GameObject Player;
-    public UnityAction<int> EventDamage;
+    public UnityAction<float> EventDamage;
+    public UnityAction EventEnemyGeneration;
     public float attackDistance = 2.0f;
-    public float moveSpeed = 3.0f;
+    private float moveSpeed = 10f;
     public float rotationSpeed = 3.0f;
     public GameObject sword;
     public Transform swordAttackPoint;
     private Animator animator;
     private bool isAttacking = false;
+    private int HP = 10;
     
     void Start()
     {
         animator = GetComponent<Animator>();
         target = Player.GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false; // 重力を無効にする
     }
     public void SetDataRepository(DataRepository Repository)
     {
         _repository = Repository;
-        _model = new EnemyModel();
+        
     }
     public void SynModel()
     {
-        var enemy = _repository.enemy[0];
-
-        _model.HP = enemy.HP;
-        _model.ATK = enemy.ATK;
-        _model.DEF = enemy.DEF;
-        _model.Speed = enemy.Speed;
-        _model.PlayerDamage = enemy.PlayerDamage;
-
+        
     }
     void Update()
     {
@@ -49,13 +47,25 @@ public class Enemy : MonoBehaviour
         }
         else
         {
+            // 斜面の法線ベクトルを取得
+            RaycastHit hit;
             Vector3 direction = target.position - transform.position;
             direction.y = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
-            transform.Translate(0, 0, moveSpeed * Time.deltaTime);
+            // transform.Translate(0, 0, moveSpeed * Time.deltaTime);
+            if (Physics.Raycast(transform.position, Vector3.down, out hit))
+            {
+                Vector3 slopeNormal = hit.normal;
+                Debug.Log(moveSpeed);
+                // 敵オブジェクトに力を追加
+                Vector3 slopeMovement = Vector3.ProjectOnPlane(direction.normalized, slopeNormal) * moveSpeed * Time.deltaTime;
+                rb.MovePosition(transform.position + slopeMovement);
+                
+            }
             animator.SetFloat("MoveSpeed", direction.magnitude);
+            
         }
-        if(_model.HP == 0)
+        if(HP == 0)
         {
             Die();
         }
@@ -68,7 +78,7 @@ public class Enemy : MonoBehaviour
         {
             if (player.CompareTag("Player"))
             {
-                EventDamage?.Invoke(_model.ATK);
+                EventDamage?.Invoke(0.1f);
                 //Debug.Log("Damage");
             }
         }
@@ -89,16 +99,17 @@ public class Enemy : MonoBehaviour
         if(other.gameObject.tag == "Bullet")
         {
             Destroy(other.gameObject);
-            Damage(_model.PlayerDamage);
-            Debug.Log(_model.HP);
+            Damage(2);
+            
         }
     }
     private void Damage(int damage)
     {
-        _model.HP = _model.HP - damage;
+        HP = HP - damage;
     }
     private void Die()
     {
+        EventEnemyGeneration?.Invoke();
         Destroy(this.gameObject);
     }
 }

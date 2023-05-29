@@ -6,11 +6,11 @@ namespace Data.Entity
     public class EnemyEntity
     {
         public int HP;
-        public int ATK;
+        public float ATK;
         public int DEF;
         public int Speed;
         public int PlayerDamage;
-        public EnemyEntity(int hp, int atk, int def, int speed, int playerDamage)
+        public EnemyEntity(int hp, float atk, int def, int speed, int playerDamage)
         {
             HP = hp;
             ATK = atk;

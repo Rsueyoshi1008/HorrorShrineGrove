@@ -12,7 +12,7 @@ namespace Script.Player
         private DataRepository _repository;
 
         public UnityAction<PlayerModel> ChangeModel;
-        public UnityAction ChangeScene;
+        
 
         private Transform Player;
 
@@ -43,15 +43,7 @@ namespace Script.Player
             Player.Translate(movement * _model.Speed * Time.deltaTime,Space.World);
             
         }
-        //敵から攻撃を受けたときの関数
-        public void Damage(int damage)
-        {
-            _model.HP -= damage;
-            if(_model.HP == 0)
-            {
-                ChangeScene?.Invoke();
-            }
-        }
+        
         
     }
 
