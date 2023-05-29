@@ -9,12 +9,14 @@ namespace Enemys.Model
         public int ATK;
         public int DEF;
         public int Speed;
+        public int PlayerDamage;
         public EnemyModel()
         {
             HP = 0;
             ATK = 0;
             DEF = 0;
             Speed = 0;
+            PlayerDamage = 0;
         }
     }
 }

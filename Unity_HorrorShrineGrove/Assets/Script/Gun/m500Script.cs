@@ -5,7 +5,7 @@ public class m500Script : MonoBehaviour
     public GameObject bulletPrefab; // 弾のプレハブ
     public Transform barrel; // 弾の発射位置
 
-    public float fireRate = 0.1f; // 発射レート（秒間の発射回数）
+    //public float fireRate = 0.1f; // 発射レート（秒間の発射回数）
     private float nextFireTime = 0f; // 次の発射時刻
 
     public int maxAmmoCount = 30; // 最大弾数
@@ -35,15 +35,15 @@ public class m500Script : MonoBehaviour
         if (Input.GetMouseButton(0) && Time.time >= nextFireTime && ammoCount > 0) // 左クリックが押されたらかつ発射レートの制限と弾が残っている場合
         {
             Fire(); // 発射メソッドを呼び出す
-            nextFireTime = Time.time + 1f / fireRate; // 次の発射時刻を更新する
+            nextFireTime = Time.time + 0.5f; // 次の発射時刻を更新する
             ammoCount--; // 弾数を減らす
 
             if (ammoCount == 0) // 残弾数が0になったらリロード開始
             {
                 Reload();
             }
-                 Debug.Log("ammoCount");
         }
+        
 
         if (Input.GetKeyDown(KeyCode.R) && ammoCount < maxAmmoCount) // Rキーが押されたらかつ弾が最大弾数未満の場合
         {
@@ -93,7 +93,7 @@ public class m500Script : MonoBehaviour
         Invoke("ResetAmmo", reloadTime);
     }
 
-      private void ResetAmmo()
+    private void ResetAmmo()
     {
         ammoCount = maxAmmoCount; // 弾数を最大弾数にリセット
         isReloading = false; // リロード中フラグを解除

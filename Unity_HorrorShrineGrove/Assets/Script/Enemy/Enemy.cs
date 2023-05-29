@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
         _model.ATK = enemy.ATK;
         _model.DEF = enemy.DEF;
         _model.Speed = enemy.Speed;
+        _model.PlayerDamage = enemy.PlayerDamage;
 
     }
     void Update()
@@ -53,6 +54,10 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
             transform.Translate(0, 0, moveSpeed * Time.deltaTime);
             animator.SetFloat("MoveSpeed", direction.magnitude);
+        }
+        if(_model.HP == 0)
+        {
+            Die();
         }
     }
     void Attack()
@@ -81,13 +86,20 @@ public class Enemy : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
-        // if(other.gameObject.tag == "Player")
-        // {
-        //     
-        //     Cursor.visible = true;
-        //     Cursor.lockState = CursorLockMode.None;
-        // }
+        if(other.gameObject.tag == "Bullet")
+        {
+            Destroy(other.gameObject);
+            Damage(_model.PlayerDamage);
+            Debug.Log(_model.HP);
+        }
     }
-    
+    private void Damage(int damage)
+    {
+        _model.HP = _model.HP - damage;
+    }
+    private void Die()
+    {
+        Destroy(this.gameObject);
+    }
 }
 

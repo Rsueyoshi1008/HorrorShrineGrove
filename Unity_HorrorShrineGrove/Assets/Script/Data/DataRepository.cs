@@ -24,7 +24,7 @@ namespace Data.Repository
         private List<EnemyEntity> InitializeEnemy()
         {
             var list = new List<EnemyEntity>();
-            list.Add(new EnemyEntity(10,1,2,5));
+            list.Add(new EnemyEntity(10,1,2,5,2));
             return list;
         }
         
