@@ -29,11 +29,11 @@ public class GunSwitch : MonoBehaviour
     {
         // 現在の武器を非アクティブにする
         weapons[currentWeaponIndex].SetActive(false);
-        Debug.Log(currentWeaponIndex);
+        
 
         // 指定した武器をアクティブにする
         weapons[weaponIndex].SetActive(true);
-        Debug.Log(weaponIndex);
+        
         currentWeaponIndex = weaponIndex; // 現在の武器のインデックスを更新
     }
 }

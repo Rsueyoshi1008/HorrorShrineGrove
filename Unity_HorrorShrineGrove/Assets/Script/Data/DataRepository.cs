@@ -25,7 +25,7 @@ namespace Data.Repository
         private List<EnemyEntity> InitializeEnemy()
         {
             var list = new List<EnemyEntity>();
-            list.Add(new EnemyEntity(10,0.1f,2,10,2));
+            list.Add(new EnemyEntity(10,0.1f,2,10,2,10));
             return list;
         }
         private M500Entity InitializeM500()

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using InGame.Gun.Model;
 using Data.Repository;
 
@@ -10,11 +11,11 @@ public class m500Script : MonoBehaviour
     public GameObject bulletPrefab; // 弾のプレハブ
     public Transform barrel; // 弾の発射位置
 
-    //public float fireRate = 0.1f; // 発射レート（秒間の発射回数）
+    private int maxAmmoCount = 0;//最大弾数
     private float nextFireTime = 0f; // 次の発射時刻
-
-    public int maxAmmoCount = 30; // 最大弾数
-    private int ammoCount; // 残弾数
+    public UnityAction EventBulletView;
+    
+    
 
     public float reloadTime = 2f; // リロードにかかる時間
     private bool isReloading = false; // リロード中かどうかのフラグ
@@ -23,16 +24,20 @@ public class m500Script : MonoBehaviour
        private float initialX; // 弾の初期X座標
 
 
-    private void Start()
+    void Start()
     {
-        ammoCount = maxAmmoCount; // 初期弾数を最大弾数に設定
         initialX = transform.position.x; // 弾の初期X座標を保存
+    }
+    public void SetDataRepository()
+    {
         _repository = gameManager.GetDataRepository();
         _model = new m500Model();
     }
     public void SynModel()
     {
-        //var gun = _repository.
+        var gun = _repository.m500;
+        maxAmmoCount = gun.GunBullet;
+        _model.GunBullet = gun.GunBullet;
     }
 
     private void Update()
@@ -42,20 +47,21 @@ public class m500Script : MonoBehaviour
             return; // リロード中は発射処理をスキップ
         }
 
-        if (Input.GetMouseButton(0) && Time.time >= nextFireTime && ammoCount > 0) // 左クリックが押されたらかつ発射レートの制限と弾が残っている場合
+        if (Input.GetMouseButton(0) && Time.time >= nextFireTime && _model.GunBullet > 0) // 左クリックが押されたらかつ発射レートの制限と弾が残っている場合
         {
             Fire(); // 発射メソッドを呼び出す
             nextFireTime = Time.time + 0.5f; // 次の発射時刻を更新する
-            ammoCount--; // 弾数を減らす
-
-            if (ammoCount == 0) // 残弾数が0になったらリロード開始
+            _model.GunBullet--; // 弾数を減らす
+            SynDataRepository();
+            Debug.Log("gun");
+            if (_model.GunBullet == 0) // 残弾数が0になったらリロード開始
             {
                 Reload();
             }
         }
         
 
-        if (Input.GetKeyDown(KeyCode.R) && ammoCount < maxAmmoCount) // Rキーが押されたらかつ弾が最大弾数未満の場合
+        if (Input.GetKeyDown(KeyCode.R) && _model.GunBullet < maxAmmoCount) // Rキーが押されたらかつ弾が最大弾数未満の場合
         {
             Reload(); // リロードメソッドを呼び出す
         }
@@ -80,7 +86,7 @@ public class m500Script : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject); // 敵に当たった場合は弾を削除
-            Debug.Log("Bullet hit enemy!");
+            
         }
     }
 
@@ -97,7 +103,6 @@ public class m500Script : MonoBehaviour
     private void Reload()
     {
         isReloading = true; // リロード中フラグを立てる
-        Debug.Log("Reloading...");
 
         // リロードにかかる時間後に弾数をリセット
         Invoke("ResetAmmo", reloadTime);
@@ -105,8 +110,14 @@ public class m500Script : MonoBehaviour
 
     private void ResetAmmo()
     {
-        ammoCount = maxAmmoCount; // 弾数を最大弾数にリセット
+        _model.GunBullet = maxAmmoCount; // 弾数を最大弾数にリセット
+        SynDataRepository();
         isReloading = false; // リロード中フラグを解除
-        Debug.Log("Reload complete. Ammo count: " + ammoCount);
+        
+    }
+    private void SynDataRepository()
+    {
+        _repository.player.Bullet = _model.GunBullet;
+        EventBulletView?.Invoke();
     }
 }

@@ -5,12 +5,14 @@ using Script.Player;
 public class PlayerPresenter : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
-    private PlayerUseCase _usecase;
+    public PlayerUseCase _usecase;
     [SerializeField] private PlayerView _view;
     [SerializeField] private TpsController _camera;
     [SerializeField] private Transform player;
 
     [SerializeField] private Enemy enemy;
+
+    [SerializeField] private GunPresenter _gunPresenter;
     void Start()
     {
         Cursor.visible = false;
@@ -21,7 +23,7 @@ public class PlayerPresenter : MonoBehaviour
         _camera.EventMove = _usecase.Move;
         enemy.EventDamage = _view.Damage;
         _usecase.ChangeModel = _view.SynModel;
-
+        _gunPresenter.Initialize();
         _usecase.SynModel();
     }
     

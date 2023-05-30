@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     
     private DataRepository _repository;
     private GameManager gameManager;
+    private EnemyModel _model;
     [SerializeField] private GameObject Player;
     public UnityAction<float> EventDamage;
     public UnityAction EventEnemyGeneration;
@@ -30,11 +31,20 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody>();
         myAgent = GetComponent<NavMeshAgent>();
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        _repository = gameManager.GetDataRepository();
+        
         
     }
-    
+    public void InitializeDataRepository()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _repository = gameManager.GetDataRepository();
+        _model = new EnemyModel();
+    }
+    public void SynModel()
+    {
+        var enemy = _repository.enemy[0];
+        _model.AchievementEnemy = 0;
+    }
     
     void Update()
     {
@@ -57,8 +67,10 @@ public class Enemy : MonoBehaviour
         }
         if(HP == 0)
         {
-            _repository.player.EnemyKill++;
-            if(_repository.player.EnemyKill == 1)
+            _model.AchievementEnemy++;
+            Debug.Log(_repository.player.EnemyKill);
+            Debug.Log(_model.AchievementEnemy);
+            if(_model.AchievementEnemy == _repository.enemy[0].AchievementEnemy)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
