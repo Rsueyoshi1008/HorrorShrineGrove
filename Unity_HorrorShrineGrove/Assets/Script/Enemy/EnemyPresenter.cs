@@ -9,10 +9,10 @@ public class EnemyPresenter : MonoBehaviour
     [SerializeField] private GenerationManager _generation;
     void Start()
     {
-        enemy.SetDataRepository(gameManager.GetDataRepository());
+        
         enemy.EventEnemyGeneration = _generation.Generation;
         
 
-        enemy.SynModel();
+        
     }
 }
