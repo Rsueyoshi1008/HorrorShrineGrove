@@ -21,7 +21,7 @@ public class EnemyGeneration : MonoBehaviour
         
         // 新しい敵を生成
         GameObject sphere_prefab = Resources.Load<GameObject>("EnemyPrefub/SkeletonWarrior 1");
-
+        Debug.Log("敵の生成");
         GameObject sphere1 = Instantiate(sphere_prefab);
         Vector3 currentLocation = transform.position;
         sphere1.transform.position = currentLocation;

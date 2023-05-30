@@ -35,6 +35,7 @@ public class PlayerView : MonoBehaviour
     public void Damage(float damage)
     {
         slider.value -= 0.1f;
+        Debug.Log("Damage");
         if(slider.value == 0)
         {
             Cursor.visible = true;

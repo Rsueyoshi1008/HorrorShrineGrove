@@ -21,7 +21,7 @@ public class PlayerPresenter : MonoBehaviour
         _usecase = new PlayerUseCase(gameManager.GetDataRepository());
         _usecase.GetTarget(player);
         _camera.EventMove = _usecase.Move;
-        enemy.EventDamage = _view.Damage;
+        
         _usecase.ChangeModel = _view.SynModel;
         _gunPresenter.Initialize();
         _usecase.SynModel();
