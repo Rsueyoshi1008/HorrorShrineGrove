@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.AI;
 using Enemys.Model;
 using Data.Repository;
 public class Enemy : MonoBehaviour
 {
     private Transform target;
     private Rigidbody rb;
+    private NavMeshAgent myAgent;
     
     private DataRepository _repository;
     [SerializeField] private GameObject Player;
     public UnityAction<float> EventDamage;
     public UnityAction EventEnemyGeneration;
     public float attackDistance = 2.0f;
-    private float moveSpeed = 10f;
+    private float moveSpeed = 20f;
     public float rotationSpeed = 3.0f;
     public GameObject sword;
     public Transform swordAttackPoint;
@@ -23,9 +25,10 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        target = Player.GetComponent<Transform>();
+        target = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody>();
-        rb.useGravity = false; // 重力を無効にする
+        myAgent = GetComponent<NavMeshAgent>();
+        
     }
     public void SetDataRepository(DataRepository Repository)
     {
@@ -47,21 +50,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            // 斜面の法線ベクトルを取得
-            RaycastHit hit;
             Vector3 direction = target.position - transform.position;
             direction.y = 0;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Time.deltaTime);
-            // transform.Translate(0, 0, moveSpeed * Time.deltaTime);
-            if (Physics.Raycast(transform.position, Vector3.down, out hit))
-            {
-                Vector3 slopeNormal = hit.normal;
-                Debug.Log(moveSpeed);
-                // 敵オブジェクトに力を追加
-                Vector3 slopeMovement = Vector3.ProjectOnPlane(direction.normalized, slopeNormal) * moveSpeed * Time.deltaTime;
-                rb.MovePosition(transform.position + slopeMovement);
-                
-            }
+            
+            myAgent.SetDestination(target.position);
             animator.SetFloat("MoveSpeed", direction.magnitude);
             
         }

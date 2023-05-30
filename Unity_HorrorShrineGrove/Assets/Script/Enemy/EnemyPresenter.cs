@@ -6,11 +6,12 @@ public class EnemyPresenter : MonoBehaviour
 {
     [SerializeField] private Enemy enemy;
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private EnemyGeneration _generation;
+    [SerializeField] private GenerationManager _generation;
     void Start()
     {
         enemy.SetDataRepository(gameManager.GetDataRepository());
-        enemy.EventEnemyGeneration = _generation.EnemyDefeated;
+        enemy.EventEnemyGeneration = _generation.Generation;
+        
 
         enemy.SynModel();
     }
