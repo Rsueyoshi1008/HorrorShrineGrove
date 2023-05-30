@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace InGame.Gun.Model
 {
-    public class Plane007Model : MonoBehaviour
+    public class Plane007Model
     {
         public int GunBullet;
 
