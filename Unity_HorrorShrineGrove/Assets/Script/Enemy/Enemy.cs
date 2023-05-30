@@ -27,15 +27,16 @@ public class Enemy : MonoBehaviour
     
     void Start()
     {
-        animator = GetComponent<Animator>();
-        target = GameObject.Find("Player").transform;
-        rb = GetComponent<Rigidbody>();
-        myAgent = GetComponent<NavMeshAgent>();
+        
         
         
     }
     public void InitializeDataRepository()
     {
+        animator = GetComponent<Animator>();
+        target = GameObject.Find("Player").transform;
+        rb = GetComponent<Rigidbody>();
+        myAgent = GetComponent<NavMeshAgent>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         _repository = gameManager.GetDataRepository();
         _model = new EnemyModel();
