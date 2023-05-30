@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyGeneration : MonoBehaviour
 {
-    //[SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject enemyPrefab;
     // Start is called before the first frame update
     void Start()
     {

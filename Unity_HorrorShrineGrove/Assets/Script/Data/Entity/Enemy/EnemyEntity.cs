@@ -10,13 +10,15 @@ namespace Data.Entity
         public int DEF;
         public int Speed;
         public int PlayerDamage;
-        public EnemyEntity(int hp, float atk, int def, int speed, int playerDamage)
+        public int AchievementEnemy;
+        public EnemyEntity(int hp, float atk, int def, int speed, int playerDamage, int achievementEnemy)
         {
             HP = hp;
             ATK = atk;
             DEF = def;
             Speed = speed;
             PlayerDamage = playerDamage;
+            AchievementEnemy = achievementEnemy;
         }
     }
 }

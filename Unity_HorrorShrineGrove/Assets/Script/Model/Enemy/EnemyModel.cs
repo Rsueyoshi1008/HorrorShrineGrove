@@ -10,6 +10,7 @@ namespace Enemys.Model
         public int DEF;
         public int Speed;
         public int PlayerDamage;
+        public int AchievementEnemy;
         public EnemyModel()
         {
             HP = 0;
@@ -17,6 +18,7 @@ namespace Enemys.Model
             DEF = 0;
             Speed = 0;
             PlayerDamage = 0;
+            AchievementEnemy = 0;
         }
     }
 }
