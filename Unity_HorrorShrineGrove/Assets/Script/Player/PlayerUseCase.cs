@@ -29,11 +29,12 @@ namespace Script.Player
 
         public void SynModel()
         {
-            var player = _repository.player[0];
+            var player = _repository.player;
 
             _model.HP = player.HP;
             _model.ATK = player.ATK;
             _model.Speed = player.Speed;
+            _model.Bullet = player.Bullet;
             
             ChangeModel?.Invoke(_model);
         }

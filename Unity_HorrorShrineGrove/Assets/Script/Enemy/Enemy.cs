@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using Enemys.Model;
 using Data.Repository;
 public class Enemy : MonoBehaviour
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent myAgent;
     
     private DataRepository _repository;
+    private GameManager gameManager;
     [SerializeField] private GameObject Player;
     public UnityAction<float> EventDamage;
     public UnityAction EventEnemyGeneration;
@@ -28,17 +30,12 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player").transform;
         rb = GetComponent<Rigidbody>();
         myAgent = GetComponent<NavMeshAgent>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _repository = gameManager.GetDataRepository();
         
     }
-    public void SetDataRepository(DataRepository Repository)
-    {
-        _repository = Repository;
-        
-    }
-    public void SynModel()
-    {
-        
-    }
+    
+    
     void Update()
     {
         if (target == null) return;
@@ -60,6 +57,13 @@ public class Enemy : MonoBehaviour
         }
         if(HP == 0)
         {
+            _repository.player.EnemyKill++;
+            if(_repository.player.EnemyKill == 1)
+            {
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                SceneManager.LoadScene("GameClearScene");
+            }
             Die();
         }
     }
@@ -72,7 +76,7 @@ public class Enemy : MonoBehaviour
             if (player.CompareTag("Player"))
             {
                 EventDamage?.Invoke(0.1f);
-                //Debug.Log("Damage");
+                
             }
         }
         Invoke("ResetAttack", 1.0f);

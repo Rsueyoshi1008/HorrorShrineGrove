@@ -8,12 +8,16 @@ namespace Data.Entity
         public int HP;
         public int ATK;
         public int Speed;
+        public int EnemyKill;
+        public int Bullet;
 
-        public PlayerEntity(int hp, int atk, int speed)
+        public PlayerEntity(int hp, int atk, int speed, int enemyKill, int bullet)
         {
             HP = hp;
             ATK = atk;
             Speed = speed;
+            EnemyKill = enemyKill;
+            Bullet = bullet;
         }
     }
 }

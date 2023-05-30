@@ -53,7 +53,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4298386734369815527, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
       propertyPath: m_Name
-      value: ak47
+      value: ak47 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4298386734369815527, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92bc9b1e2cd53fb459d0fa68ba8a6cf9, type: 3}

@@ -18,7 +18,7 @@ public class EnemyGeneration : MonoBehaviour
     }
     public void EnemyDefeated()
     {
-        Debug.Log("EnemyCreate");
+        
         // 新しい敵を生成
         GameObject sphere_prefab = Resources.Load<GameObject>("EnemyPrefub/SkeletonWarrior 1");
 

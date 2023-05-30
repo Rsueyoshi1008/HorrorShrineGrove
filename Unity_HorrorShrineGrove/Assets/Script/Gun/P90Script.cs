@@ -42,7 +42,7 @@ public class P90Script : MonoBehaviour
             {
                 Reload();
             }
-                 Debug.Log("ammoCount");
+                Debug.Log("ammoCount");
         }
 
         if (Input.GetKeyDown(KeyCode.R) && ammoCount < maxAmmoCount) // Rキーが押されたらかつ弾が最大弾数未満の場合
