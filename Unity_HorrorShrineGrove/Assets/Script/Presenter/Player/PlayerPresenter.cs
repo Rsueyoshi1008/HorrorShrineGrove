@@ -12,7 +12,7 @@ public class PlayerPresenter : MonoBehaviour
 
     [SerializeField] private Enemy enemy;
 
-    [SerializeField] private GunPresenter _gunPresenter;
+    [SerializeField] private GunManagerPresenter _gunManagerPresenter;
     void Start()
     {
         Cursor.visible = false;
@@ -23,7 +23,7 @@ public class PlayerPresenter : MonoBehaviour
         _camera.EventMove = _usecase.Move;
         
         _usecase.ChangeModel = _view.SynModel;
-        _gunPresenter.Initialize();
+        _gunManagerPresenter.Initialize();
         _usecase.SynModel();
     }
     

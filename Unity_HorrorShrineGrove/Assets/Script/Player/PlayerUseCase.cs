@@ -26,6 +26,12 @@ namespace Script.Player
         {
             Player = target;
         }
+        public void GetGunModel(int bullet)
+        {
+            _model.Bullet = bullet;
+            
+            ChangeModel?.Invoke(_model);
+        }
 
         public void SynModel()
         {
@@ -38,6 +44,7 @@ namespace Script.Player
             
             ChangeModel?.Invoke(_model);
         }
+        
         public void Move(Vector3 movement)
         {
             //キャラの移動をする

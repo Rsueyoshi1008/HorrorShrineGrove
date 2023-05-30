@@ -6,6 +6,7 @@ using Data.Repository;
 public class m500Script : MonoBehaviour
 {
     [SerializeField] private GameManager gameManager;
+    [SerializeField] private BulletCount bulletCount;
     private DataRepository _repository;
     private m500Model _model;
     public GameObject bulletPrefab; // 弾のプレハブ
@@ -21,17 +22,17 @@ public class m500Script : MonoBehaviour
     private bool isReloading = false; // リロード中かどうかのフラグ
 
     private GameObject shooter; // 発射したオブジェクト（銃）の参照
-       private float initialX; // 弾の初期X座標
+    private float initialX; // 弾の初期X座標
+
+    
 
 
-    void Start()
-    {
-        initialX = transform.position.x; // 弾の初期X座標を保存
-    }
+    
     public void SetDataRepository()
     {
         _repository = gameManager.GetDataRepository();
         _model = new m500Model();
+        initialX = transform.position.x; // 弾の初期X座標を保存
     }
     public void SynModel()
     {
@@ -53,25 +54,18 @@ public class m500Script : MonoBehaviour
             nextFireTime = Time.time + 0.5f; // 次の発射時刻を更新する
             _model.GunBullet--; // 弾数を減らす
             SynDataRepository();
-            Debug.Log("gun");
+            
             if (_model.GunBullet == 0) // 残弾数が0になったらリロード開始
             {
                 Reload();
             }
+            bulletCount.BulletTimeLapse();
         }
         
 
         if (Input.GetKeyDown(KeyCode.R) && _model.GunBullet < maxAmmoCount) // Rキーが押されたらかつ弾が最大弾数未満の場合
         {
             Reload(); // リロードメソッドを呼び出す
-        }
-
-        float distance = Mathf.Abs(transform.position.x - initialX); // 弾の現在のX座標と初期X座標の距離を計算
-
-        if (distance >= 100f)
-        {
-            Destroy(gameObject); // X座標の移動距離が200以上になった場合は弾を削除
-            Debug.Log("Bullet traveled 200 units on the X-axis.");
         }
 
     }
@@ -117,6 +111,7 @@ public class m500Script : MonoBehaviour
     }
     private void SynDataRepository()
     {
+        
         _repository.player.Bullet = _model.GunBullet;
         EventBulletView?.Invoke();
     }

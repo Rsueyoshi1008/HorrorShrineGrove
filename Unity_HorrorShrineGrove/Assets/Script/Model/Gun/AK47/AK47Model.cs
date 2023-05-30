@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Data.Entity
+namespace InGame.Gun.Model
 {
-    public class m500Entity
+    public class AK47Model
     {
         public int GunBullet;
-        
-        public m500Entity(int gunBullet)
+
+        public AK47Model()
         {
-            GunBullet = gunBullet;
+            GunBullet = 0;
         }
     }
 }

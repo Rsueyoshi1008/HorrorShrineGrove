@@ -1,15 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Data.Entity
+namespace InGame.Gun.Model
 {
-    public class m500Entity
+    public class Plane007Model : MonoBehaviour
     {
         public int GunBullet;
-        
-        public m500Entity(int gunBullet)
+
+        public Plane007Model()
         {
-            GunBullet = gunBullet;
+            GunBullet = 0;
         }
     }
 }
