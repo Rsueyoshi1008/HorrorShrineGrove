@@ -20,7 +20,7 @@ public class PlayerPresenter : MonoBehaviour
         _usecase.GetTarget(player);
         _camera.EventMove = _usecase.Move;
         enemy.EventDamage = _view.Damage;
-        //_usecase.ChangeScene = 
+        _usecase.ChangeModel = _view.SynModel;
 
         _usecase.SynModel();
     }

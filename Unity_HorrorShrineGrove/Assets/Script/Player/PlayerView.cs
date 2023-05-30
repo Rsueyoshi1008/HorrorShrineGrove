@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using InGame.Player.Model;
 public class PlayerView : MonoBehaviour
 {
-
+    [SerializeField] private Text testBullet;
     [SerializeField] private Slider slider;
+    private PlayerModel _model; 
     public UnityAction ChangeScene;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,15 @@ public class PlayerView : MonoBehaviour
     void Update()
     {
         
+    }
+    public void SynModel(PlayerModel model)
+    {
+        _model = model;
+        Show(_model.Bullet);
+    }
+    private void Show(int bullet)
+    {
+        testBullet.text = bullet.ToString();
     }
     //敵から攻撃を受けたときの関数
     public void Damage(float damage)
