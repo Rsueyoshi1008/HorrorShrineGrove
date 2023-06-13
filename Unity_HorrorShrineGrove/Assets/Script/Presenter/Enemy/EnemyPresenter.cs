@@ -16,7 +16,7 @@ public class EnemyPresenter : MonoBehaviour
         enemy.InitializeDataRepository();
         enemy.EventDamage = _playerView.Damage;
         enemy.EventEnemyGeneration = _generation.Generation;
-        
+        enemy.SynModel();
 
         
     }

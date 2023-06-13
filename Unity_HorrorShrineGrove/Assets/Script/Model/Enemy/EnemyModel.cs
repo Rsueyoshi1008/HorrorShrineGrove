@@ -11,6 +11,7 @@ namespace Enemys.Model
         public int Speed;
         public int PlayerDamage;
         public int AchievementEnemy;
+        public int OverthrowEnemy;
         public EnemyModel()
         {
             HP = 0;
@@ -19,6 +20,7 @@ namespace Enemys.Model
             Speed = 0;
             PlayerDamage = 0;
             AchievementEnemy = 0;
+            OverthrowEnemy = 0;
         }
     }
 }

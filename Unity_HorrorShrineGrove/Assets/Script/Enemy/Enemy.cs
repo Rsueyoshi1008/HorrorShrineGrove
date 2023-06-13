@@ -44,7 +44,8 @@ public class Enemy : MonoBehaviour
     public void SynModel()
     {
         var enemy = _repository.enemy[0];
-        _model.AchievementEnemy = 0;
+        _model.AchievementEnemy = enemy.AchievementEnemy;
+        _model.OverthrowEnemy = enemy.OverthrowEnemy;
     }
     
     void Update()
@@ -68,15 +69,15 @@ public class Enemy : MonoBehaviour
         }
         if(HP == 0)
         {
-            _model.AchievementEnemy++;
-            Debug.Log(_repository.player.EnemyKill);
-            Debug.Log(_model.AchievementEnemy);
-            if(_model.AchievementEnemy == _repository.enemy[0].AchievementEnemy)
+            _model.OverthrowEnemy++;
+            if(_model.OverthrowEnemy == _model.AchievementEnemy)
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
                 SceneManager.LoadScene("GameClearScene");
             }
+            SyncRepository();
+            //Debug.Log(_model.OverthrowEnemy);
             Die();
         }
     }
@@ -121,6 +122,11 @@ public class Enemy : MonoBehaviour
     {
         EventEnemyGeneration?.Invoke();
         Destroy(this.gameObject);
+    }
+    public void SyncRepository()
+    {
+        _repository.enemy[0].OverthrowEnemy = _model.OverthrowEnemy;
+        Debug.Log(_repository.enemy[0].OverthrowEnemy);
     }
 }
 

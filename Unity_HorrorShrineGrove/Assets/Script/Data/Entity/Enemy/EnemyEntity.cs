@@ -11,7 +11,8 @@ namespace Data.Entity
         public int Speed;
         public int PlayerDamage;
         public int AchievementEnemy;
-        public EnemyEntity(int hp, float atk, int def, int speed, int playerDamage, int achievementEnemy)
+        public int OverthrowEnemy;
+        public EnemyEntity(int hp, float atk, int def, int speed, int playerDamage, int achievementEnemy, int overthrowEnemy)
         {
             HP = hp;
             ATK = atk;
@@ -19,6 +20,7 @@ namespace Data.Entity
             Speed = speed;
             PlayerDamage = playerDamage;
             AchievementEnemy = achievementEnemy;
+            OverthrowEnemy = overthrowEnemy;
         }
     }
 }
